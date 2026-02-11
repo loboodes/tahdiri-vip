@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة تحضيري الذكية - المناهج السعودية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-emerald: #059669;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* تخصيص شريط التمرير (Scrollbar) */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* تحسين التمرير في القائمة الجانبية */
+        @media (min-width: 1024px) {
+            .sidebar {
+                max-height: calc(100vh - 120px);
+                overflow-y: auto;
+                position: sticky;
+                top: 80px;
+                padding-left: 10px;
+            }
+        }
+
+        /* إعدادات الطباعة الاحترافية */
+        @media print {
+            .no-print, 
+            header, 
+            footer, 
+            button, 
+            .sidebar, 
+            nav,
+            .fixed-buttons,
+            .print-hidden,
+            [role="alert"] {
+                display: none !important;
+            }
+
+            body, html {
+                background-color: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            #root, main {
+                display: block !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            main.grid {
+                display: block !important;
+            }
+
+            .max-w-7xl {
+                max-width: none !important;
+                width: 100% !important;
+            }
+
+            .print-container {
+                display: block !important;
+                width: 100% !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background: white !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 1.5cm;
+            }
+
+            section, .section-break {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            p, span, h1, h2, h3, li {
+                color: black !important;
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom": "https://esm.sh/react-dom@^19.2.4",
+    "react-dom/client": "https://esm.sh/react-dom@19.2.4/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
