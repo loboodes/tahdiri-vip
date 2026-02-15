@@ -4,7 +4,6 @@ export interface LessonPlan {
   teacherName: string;
   schoolName: string;
   eduDepartment: string;
-  eduOffice: string;
   subject: string;
   grade: string;
   term: string;

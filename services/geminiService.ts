@@ -2,8 +2,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { LessonPlan } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-
 export const generateLessonContent = async (
   subject: string,
   grade: string,
@@ -12,22 +10,27 @@ export const generateLessonContent = async (
   term: string
 ): Promise<Partial<LessonPlan>> => {
   try {
-    const prompt = `أنت خبير تربوي في المناهج السعودية لعام 1447 هـ. قم بإعداد تحضير درس احترافي ومفصل للموضوع التالي:
+    // إنشاء المثيل داخل الدالة لضمان استخدام أحدث API_KEY من البيئة
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    
+    const prompt = `أنت خبير تربوي ومستشار تعليمي للمناهج السعودية المطورة. 
+    قم بإعداد تحضير درس نموذجي واحترافي للموضوع التالي:
     المادة: ${subject}
     الصف: ${grade}
     الفصل الدراسي: ${term}
     الوحدة: ${unitTitle}
     عنوان الدرس: ${lessonTitle}
 
-    يجب أن يتضمن التحضير:
-    1. أهداف الدرس (قائمة من 3-5 أهداف سلوكية تراعي مهارات التفكير).
-    2. الوسائل التعليمية المقترحة.
-    3. تمهيد مشوق للدرس.
-    4. إجراءات التدريس (خطوات عملية للمعلم).
-    5. أساليب التقويم.
-    6. الواجب المنزلي.
+    المطلوب هو إنشاء محتوى تربوي رصين يشمل:
+    1. أهداف الدرس: 3-5 أهداف (معرفية، وجدانية، مهارية).
+    2. الوسائل التعليمية: مصادر التعلم والتقنيات المستخدمة.
+    3. التمهيد: مقدمة مشوقة لجذب الطلاب.
+    4. إجراءات التدريس: خطوات تنفيذ الدرس بالتفصيل.
+    5. أساليب التقويم: أسئلة أو أنشطة لتقييم الفهم.
+    6. الواجب المنزلي: اذكر مهمة إثرائية أو تدريبية عامة متعلقة بالدرس، ولكن **لا تكتب رقم صفحة محدد**، اترك للمعلم حرية تحديد رقم الصفحة (مثال: حل الأسئلة المتعلقة بـ... في صفحة يحددها المعلم).
 
-    يرجى تقديم النتيجة بتنسيق JSON حصراً.`;
+    يجب أن يكون الأسلوب متوافقاً مع "دليل المعلم" السعودي الحديث.
+    يرجى تقديم النتيجة بتنسيق JSON فقط.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -49,10 +52,12 @@ export const generateLessonContent = async (
       }
     });
 
-    const result = JSON.parse(response.text || '{}');
-    return result;
-  } catch (error) {
+    return JSON.parse(response.text || '{}');
+  } catch (error: any) {
     console.error("Gemini Error:", error);
+    if (error.message?.includes("entity was not found")) {
+      throw new Error("مفتاح الـ API غير صالح أو لم يتم تفعيله بشكل صحيح.");
+    }
     throw error;
   }
 };

@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { LessonPlan } from '../types';
-import { ACADEMIC_YEAR } from '../constants';
 
 interface Props {
   data: LessonPlan;
@@ -9,118 +8,125 @@ interface Props {
 
 const LessonPreview: React.FC<Props> = ({ data }) => {
   return (
-    <div className="bg-white p-8 border rounded-lg shadow-sm print-container min-h-screen transition-all duration-300">
-      {/* Saudi Seal Placeholder / Header */}
-      <div className="flex justify-between items-start mb-8 border-b-2 border-emerald-600 pb-4 section-break">
-        <div className="text-[11px] leading-tight space-y-1">
-          <p>المملكة العربية السعودية</p>
+    <div className="bg-white p-10 border rounded-lg shadow-xl print-container min-h-[297mm] transition-all duration-300 relative">
+      {/* Decorative Border for Print */}
+      <div className="absolute inset-4 border border-slate-100 pointer-events-none print:hidden"></div>
+
+      {/* Header Section */}
+      <div className="flex justify-between items-center mb-8 border-b-2 border-emerald-700 pb-6 section-break">
+        <div className="text-[11px] leading-relaxed">
+          <p className="font-bold">المملكة العربية السعودية</p>
           <p>وزارة التعليم</p>
-          <p>إدارة التعليم بـ: <span className="font-bold">{data.eduDepartment || '....................'}</span></p>
-          <p>مكتب التعليم بـ: <span className="font-bold">{data.eduOffice || '....................'}</span></p>
-          <p>مدرسة: <span className="font-bold">{data.schoolName || '....................'}</span></p>
+          <p>إدارة: <span className="font-bold border-b border-dotted border-slate-400 min-w-[60px] inline-block">{data.eduDepartment || '.........'}</span></p>
+          <p>مدرسة: <span className="font-bold border-b border-dotted border-slate-400 min-w-[60px] inline-block">{data.schoolName || '.........'}</span></p>
         </div>
+
         <div className="text-center">
-            <div className="h-16 w-16 bg-slate-50 flex items-center justify-center mx-auto mb-2 rounded-full border border-slate-200">
-                <img src="https://upload.wikimedia.org/wikipedia/ar/2/22/Ministry_of_Education_%28Saudi_Arabia%29_logo.svg" alt="وزارة التعليم" className="h-12 w-12" />
-            </div>
-            <h2 className="text-lg font-bold">نموذج تحضير الدروس</h2>
-            <p className="text-xs font-bold text-emerald-700">العام الدراسي: {ACADEMIC_YEAR}</p>
+          <img src="https://upload.wikimedia.org/wikipedia/ar/2/22/Ministry_of_Education_%28Saudi_Arabia%29_logo.svg" alt="وزارة التعليم" className="h-20 w-auto mx-auto mb-2" />
+          <h2 className="text-xl font-extrabold text-slate-800">بطاقة تحضير درس</h2>
+          <div className="mt-1 flex items-center justify-center gap-2">
+            <span className="bg-emerald-700 text-white text-[10px] px-2 py-0.5 rounded">نظام المسارات</span>
+          </div>
         </div>
-        <div className="text-[11px] text-left space-y-1" dir="ltr">
-          <p>Teacher: <span className="font-bold">{data.teacherName || '....................'}</span></p>
-          <p>Subject: <span className="font-bold">{data.subject}</span></p>
-          <p>Date: <span className="font-bold">{data.date}</span></p>
+
+        <div className="text-[11px] text-left" dir="ltr">
+          <div className="w-16 h-16 bg-slate-100 border border-slate-200 mb-2 flex items-center justify-center text-[8px] text-slate-400 font-mono">
+            Digital Seal
+          </div>
+          <p>ID: {Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+          <p>Date: {data.date}</p>
         </div>
       </div>
 
-      {/* Grid Header Info */}
-      <div className="grid grid-cols-4 gap-0 border border-slate-300 mb-6 text-[13px] section-break">
-        <div className="border-l border-b p-2 bg-slate-50 font-bold">المادة</div>
-        <div className="border-l border-b p-2">{data.subject}</div>
-        <div className="border-l border-b p-2 bg-slate-50 font-bold">الصف</div>
-        <div className="border-b p-2">{data.grade}</div>
+      {/* Info Bar */}
+      <div className="bg-slate-50 border border-slate-200 rounded-lg grid grid-cols-4 overflow-hidden mb-8 text-[13px] section-break">
+        <div className="p-3 border-l border-b border-slate-200 bg-emerald-50/50 font-bold text-emerald-900">المادة</div>
+        <div className="p-3 border-l border-b border-slate-200">{data.subject}</div>
+        <div className="p-3 border-l border-b border-slate-200 bg-emerald-50/50 font-bold text-emerald-900">الصف</div>
+        <div className="p-3 border-b border-slate-200 font-bold">{data.grade}</div>
         
-        <div className="border-l border-b p-2 bg-slate-50 font-bold">الفصل الدراسي</div>
-        <div className="border-l border-b p-2">{data.term}</div>
-        <div className="border-l border-b p-2 bg-slate-50 font-bold">الأسبوع</div>
-        <div className="border-b p-2">{data.week}</div>
-
-        <div className="border-l p-2 bg-slate-50 font-bold">الوحدة</div>
-        <div className="border-l p-2">{data.unitTitle || '....................'}</div>
-        <div className="border-l p-2 bg-slate-50 font-bold">موضوع الدرس</div>
-        <div className="p-2 font-bold text-emerald-700">{data.lessonTitle || '....................'}</div>
+        <div className="p-3 border-l border-slate-200 bg-emerald-50/50 font-bold text-emerald-900">الفصل</div>
+        <div className="p-3 border-l border-slate-200">{data.term}</div>
+        <div className="p-3 border-l border-slate-200 bg-emerald-50/50 font-bold text-emerald-900">موضوع الدرس</div>
+        <div className="p-3 font-extrabold text-emerald-700">{data.lessonTitle || 'حدد عنوان الدرس'}</div>
       </div>
 
-      {/* Main Content Sections */}
-      <div className="space-y-6">
+      {/* Content Sections */}
+      <div className="space-y-8">
         <section className="section-break">
-          <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">الأهداف التعليمية</h3>
-          <ul className="list-disc list-inside space-y-1 text-[13px] pr-4">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-6 bg-emerald-600 rounded-full"></div>
+            <h3 className="text-base font-bold text-slate-800">الأهداف التعليمية</h3>
+          </div>
+          <ul className="grid grid-cols-1 gap-2 pr-6">
             {data.objectives.filter(o => o.trim()).map((obj, i) => (
-              <li key={i}>{obj}</li>
+              <li key={i} className="text-sm text-slate-700 list-disc leading-relaxed">{obj}</li>
             ))}
-            {data.objectives.filter(o => o.trim()).length === 0 && <li>..................................................................</li>}
+            {data.objectives.filter(o => o.trim()).length === 0 && <li className="text-slate-300 italic">بانتظار توليد الأهداف...</li>}
           </ul>
         </section>
 
         <section className="section-break">
-          <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">الوسائل والمصادر</h3>
-          <div className="flex flex-wrap gap-2 pr-4 text-[12px]">
-            {data.materials.map((m, i) => (
-              <span key={i} className="px-2 py-0.5 bg-slate-100 rounded border border-slate-200">{m}</span>
-            ))}
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-6 bg-emerald-600 rounded-full"></div>
+            <h3 className="text-base font-bold text-slate-800">التمهيد والوسائل</h3>
+          </div>
+          <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-100">
+            <p className="text-sm text-slate-700 leading-loose mb-4">{data.introduction || 'أدخل مقدمة الدرس هنا...'}</p>
+            <div className="flex flex-wrap gap-2">
+              {data.materials.map((m, i) => (
+                <span key={i} className="text-[11px] bg-white border border-emerald-100 text-emerald-700 px-3 py-1 rounded-full shadow-sm">
+                  {m}
+                </span>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="section-break">
-          <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">تمهيد الدرس</h3>
-          <p className="text-[13px] pr-4 leading-relaxed whitespace-pre-wrap">{data.introduction || '............................................................................................................................................................................................................'}</p>
-        </section>
-
-        <section className="section-break">
-          <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">إجراءات التدريس وعرض الدرس</h3>
-          <div className="space-y-2 pr-4 text-[13px]">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-6 bg-emerald-600 rounded-full"></div>
+            <h3 className="text-base font-bold text-slate-800">عرض الدرس وإجراءات التدريس</h3>
+          </div>
+          <div className="space-y-3 pr-4">
             {data.activities.filter(a => a.trim()).map((act, i) => (
-              <div key={i} className="flex gap-2">
-                <span className="font-bold text-emerald-600 min-w-[20px]">{i + 1}.</span>
-                <p className="whitespace-pre-wrap">{act}</p>
+              <div key={i} className="flex gap-4">
+                <span className="flex-none w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-[11px] flex items-center justify-center font-bold">{i + 1}</span>
+                <p className="text-sm text-slate-700 leading-relaxed pt-0.5">{act}</p>
               </div>
             ))}
-            {data.activities.filter(a => a.trim()).length === 0 && <p>..................................................................................................................................</p>}
           </div>
         </section>
 
-        <div className="grid grid-cols-2 gap-4 section-break">
-          <section>
-            <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">التقويم والختام</h3>
-            <ul className="list-disc list-inside space-y-1 text-[12px] pr-4">
-              {data.assessment.filter(as => as.trim()).map((as, i) => (
-                <li key={i}>{as}</li>
+        <div className="grid grid-cols-2 gap-8 section-break">
+          <section className="bg-slate-50/30 p-4 rounded-xl border border-slate-100">
+            <h4 className="font-bold text-slate-800 mb-2 text-sm border-b pb-1">التقويم والقياس</h4>
+            <ul className="space-y-1">
+              {data.assessment.map((as, i) => (
+                <li key={i} className="text-xs text-slate-600">• {as}</li>
               ))}
-              {data.assessment.filter(as => as.trim()).length === 0 && <li>......................................................</li>}
             </ul>
           </section>
-          <section>
-            <h3 className="bg-emerald-50 text-emerald-800 font-bold p-1 border-r-4 border-emerald-600 mb-2 text-sm">الواجب المنزلي</h3>
-            <p className="text-[13px] pr-4 italic">{data.homework || '..................................................................'}</p>
+          <section className="bg-emerald-50/30 p-4 rounded-xl border border-emerald-100">
+            <h4 className="font-bold text-emerald-900 mb-2 text-sm border-b border-emerald-100 pb-1">الواجب والنشاط الإثرائي</h4>
+            <p className="text-xs text-emerald-800 italic leading-relaxed">{data.homework || 'توليد الواجب...'}</p>
           </section>
         </div>
 
-        <section className="mt-8 pt-4 border-t border-slate-100 section-break">
-           <div className="flex justify-between items-end text-[10px] text-slate-500 italic">
-                <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Saudi_Vision_2030_logo.svg" className="h-5" alt="v2030" />
-                        <span className="font-bold text-slate-700 not-italic">تحقيقاً لمستهدفات الرؤية الوطنية</span>
-                    </div>
-                    <span className="max-w-[400px] leading-snug">{data.visionAlignment}</span>
-                </div>
-                <div className="text-center space-y-4">
-                    <p className="not-italic font-bold border-b border-slate-200 pb-1">اعتماد قائد/ة المدرسة</p>
-                    <p className="text-slate-300">التوقيع والختم الرسمي</p>
-                </div>
-           </div>
-        </section>
+        {/* Vision Footer */}
+        <footer className="mt-12 pt-6 border-t border-slate-100 flex justify-between items-end section-break">
+          <div className="flex items-center gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Saudi_Vision_2030_logo.svg" className="h-10 opacity-80" alt="رؤية 2030" />
+            <div className="text-[10px] text-slate-500 max-w-xs">
+              <p className="font-bold text-emerald-800 mb-1">المواءمة مع رؤية 2030:</p>
+              <p>{data.visionAlignment}</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <p className="text-[11px] font-bold text-slate-700 mb-8">يعتمد من مدير/ة المدرسة</p>
+            <div className="w-32 h-0.5 bg-slate-200 mx-auto"></div>
+          </div>
+        </footer>
       </div>
     </div>
   );

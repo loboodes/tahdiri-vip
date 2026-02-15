@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -45,8 +46,9 @@
             }
         }
 
-        /* إعدادات الطباعة الاحترافية */
+        /* إعدادات الطباعة الاحترافية لضمان الحفظ كـ PDF بشكل سليم */
         @media print {
+            /* إخفاء كل العناصر غير المرتبطة بالتحضير */
             .no-print, 
             header, 
             footer, 
@@ -55,7 +57,8 @@
             nav,
             .fixed-buttons,
             .print-hidden,
-            [role="alert"] {
+            [role="alert"],
+            .preview-label {
                 display: none !important;
             }
 
@@ -85,6 +88,7 @@
                 width: 100% !important;
             }
 
+            /* الحاوية الرئيسية للتحضير عند الطباعة */
             .print-container {
                 display: block !important;
                 width: 100% !important;
@@ -93,13 +97,17 @@
                 padding: 0 !important;
                 margin: 0 !important;
                 background: white !important;
+                transform: none !important;
+                overflow: visible !important;
             }
 
+            /* إعداد الصفحة A4 */
             @page {
                 size: A4;
-                margin: 1.5cm;
+                margin: 1cm;
             }
 
+            /* منع قطع العناصر في منتصف الصفحة */
             section, .section-break {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
@@ -107,6 +115,7 @@
                 margin-bottom: 20px;
             }
 
+            /* إجبار الألوان على الظهور في الـ PDF */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;

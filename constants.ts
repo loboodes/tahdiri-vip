@@ -17,18 +17,14 @@ export const SUBJECTS: Subject[] = [
 
 export const TERMS = [
   'الفصل الدراسي الأول',
-  'الفصل الدراسي الثاني',
-  'الفصل الدراسي الثالث'
+  'الفصل الدراسي الثاني'
 ];
-
-export const ACADEMIC_YEAR = "1447 هـ";
 
 export const INITIAL_LESSON: LessonPlan = {
   id: '',
   teacherName: '',
   schoolName: '',
   eduDepartment: '',
-  eduOffice: '',
   subject: 'اللغة العربية',
   grade: 'الأول الابتدائي',
   term: 'الفصل الدراسي الأول',

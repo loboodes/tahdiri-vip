@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ACADEMIC_YEAR } from '../constants';
 
 const Header: React.FC = () => {
   return (
@@ -15,13 +14,12 @@ const Header: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold text-slate-800">تحضيري الذكي</h1>
-              <span className="bg-emerald-100 text-emerald-700 text-[10px] px-1.5 py-0.5 rounded-full font-bold">{ACADEMIC_YEAR}</span>
             </div>
             <p className="text-xs text-slate-500 font-medium">بوابة المعلم للمناهج السعودية المطورة</p>
           </div>
         </div>
+
         <div className="flex items-center gap-4 text-sm font-medium text-emerald-700">
-          <span className="hidden sm:inline">الرؤية 2030</span>
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Saudi_Vision_2030_logo.svg" alt="Vision 2030" className="h-8" />
         </div>
       </div>
